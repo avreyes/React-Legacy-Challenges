@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container} from 'reactstrap';
-import ToDoInput from './ToDoInput';
+import ToDoInput from './ToDoList';
 
 const ToDo = () => {
   return(
@@ -25,6 +25,7 @@ const ToDo = () => {
          </li>
        </ul>
        <hr />
+       <h4>To Do List</h4>
        <ToDoInput />
      </Container>
   );
