@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Input} from 'reactstrap';
- 
-const SearchIndex extends Component() {
-   this.state = {
-     things: ['pen', 'marker', 'eraser', 'notebook', 'pencil', 'scissors', 'highlighter', 'stapler', 'paper clip', 'binder', 'hole punch', 'laminator', 'laminating sheets', 'protective sheets', 'index cards']
-   }
- }
+import ThingsContainer from './ThingsContainer';
 
- function searchFunction() {
- }
+export default class SearchIndex extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      things: 
+        ['pen', 'marker', 'eraser', 'notebook', 'pencil', 'scissors', 'highlighter', 'stapler', 'paper clip', 'binder', 'hole punch', 'laminator', 'laminating sheets', 'protective sheets', 'index cards'],
+      searchTerm: ''
+    };
+  };
 
- render() {
-     <div>
-       <Input placeholder='Search Here' />
-       <h3>Results:</h3>
-     </div>
- }
+  editSearchTerm = (e) => {
+    this.setState({searchTerm: e.target.value})
+  }
 
- 
-export SearchIndex;
+  dynamicSearch = () => {
+    return this.state.things.filter(thing => thing.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+  }
+
+  render() {
+    return(
+    <div>
+      <input type="text" value={this.state.searchTerm} onChange = {this.editSearchTerm} placeholder = "Search for Things..." />
+      <button type="submit">Search</button>
+      <h3>Results:</h3>
+      <ThingsContainer things = {this.dynamicSearch()}/>
+    </div>
+    );
+  }  
+}
